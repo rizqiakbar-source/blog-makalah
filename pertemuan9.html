@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Makalah Pertemuan 9</title>
 
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f1f5f9;
+      margin:0;
+      padding:0;
+      line-height:1.8;
+    }
+
+    .container{
+      width:90%;
+      max-width:900px;
+      margin:40px auto;
+      background:white;
+      padding:40px;
+      border-radius:15px;
+      box-shadow:0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1{
+      text-align:center;
+      color:#1e3a8a;
+    }
+
+    h2{
+      color:#2563eb;
+      margin-top:30px;
+    }
+
+    p{
+      text-align:justify;
+    }
+
+    pre{
+      background:#0f172a;
+      color:white;
+      padding:15px;
+      border-radius:10px;
+      overflow:auto;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:40px;
+      color:gray;
+    }
+
+    .badge{
+      display:inline-block;
+      background:#2563eb;
+      color:white;
+      padding:8px 14px;
+      border-radius:20px;
+      margin-top:10px;
+      font-size:14px;
+    }
+
+    a{
+      color:#2563eb;
+      text-decoration:none;
+      font-weight:bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Implementasi Stored Procedure pada Database AKADEMIK</h1>
+
+<center>
+<span class="badge">Praktikum Pertemuan 9</span>
+</center>
+
+<p>
+Pada praktikum pertemuan ke-9 mata kuliah Pemrograman SQL Lanjut, saya mempelajari materi mengenai Stored Procedure pada database AKADEMIK. Stored procedure merupakan kumpulan perintah SQL yang disimpan di dalam database dan dapat dijalankan kembali kapan saja sesuai kebutuhan. Materi ini sangat penting karena stored procedure digunakan untuk mempermudah proses pengolahan data serta meningkatkan efisiensi dalam menjalankan query SQL.
+</p>
+
+<p>
+Pada praktikum ini, saya mempelajari cara membuat stored procedure sederhana menggunakan parameter input dan menjalankan procedure tersebut untuk menampilkan data dari tabel mahasiswa. Selain itu, saya juga belajar bagaimana procedure dapat digunakan untuk mempermudah proses query yang sering digunakan secara berulang.
+</p>
+
+<h2>Pengertian Stored Procedure</h2>
+
+<p>
+Stored procedure adalah sekumpulan query SQL yang disimpan di dalam database server. Procedure ini dapat dipanggil kembali tanpa harus menulis ulang query SQL yang sama. Dengan menggunakan stored procedure, proses pengolahan data menjadi lebih cepat, aman, dan lebih mudah dikelola.
+</p>
+
+<p>
+Stored procedure biasanya digunakan pada aplikasi berbasis database untuk mengatur proses pengambilan data, manipulasi data, maupun proses otomatis lainnya.
+</p>
+
+<h2>Membuat Stored Procedure</h2>
+
+<p>
+Pada praktikum ini saya mempelajari cara membuat stored procedure sederhana menggunakan parameter input. Contoh query yang digunakan adalah sebagai berikut:
+</p>
+
+<pre>
+CREATE PROCEDURE tampilMahasiswa(
+  IN p_prodi INT
+)
+BEGIN
+  SELECT * FROM mahasiswa
+  WHERE idprodi = p_prodi;
+END;
+</pre>
+
+<p>
+Query tersebut digunakan untuk menampilkan data mahasiswa berdasarkan program studi tertentu. Parameter p_prodi digunakan sebagai input agar pengguna dapat memilih program studi yang ingin ditampilkan.
+</p>
+
+<h2>Menjalankan Stored Procedure</h2>
+
+<p>
+Setelah procedure berhasil dibuat, langkah berikutnya adalah menjalankan procedure menggunakan perintah CALL.
+</p>
+
+<pre>
+CALL tampilMahasiswa(1);
+</pre>
+
+<p>
+Perintah tersebut digunakan untuk menampilkan data mahasiswa dengan id program studi 1. Dengan menggunakan procedure, query menjadi lebih sederhana dan mudah digunakan kembali.
+</p>
+
+<h2>Keuntungan Stored Procedure</h2>
+
+<p>
+Stored procedure memiliki banyak keuntungan dalam pengolahan database. Salah satunya adalah meningkatkan efisiensi karena query tidak perlu ditulis berulang kali. Selain itu, stored procedure juga membantu meningkatkan keamanan database karena pengguna tidak langsung mengakses tabel utama.
+</p>
+
+<p>
+Keuntungan lainnya adalah proses maintenance menjadi lebih mudah. Jika terdapat perubahan query, programmer hanya perlu memperbarui procedure tanpa mengubah seluruh kode aplikasi.
+</p>
+
+<h2>Penerapan pada Database AKADEMIK</h2>
+
+<p>
+Pada database AKADEMIK, stored procedure dapat digunakan untuk menampilkan data mahasiswa, data dosen, data mata kuliah, maupun proses pengolahan nilai mahasiswa. Dengan adanya stored procedure, pengolahan data akademik menjadi lebih terstruktur dan efisien.
+</p>
+
+<p>
+Selain itu, stored procedure juga membantu dalam membuat sistem informasi akademik yang lebih cepat dan stabil karena sebagian proses dijalankan langsung oleh server database.
+</p>
+
+<h2>Kesimpulan</h2>
+
+<p>
+Menurut saya, materi Stored Procedure sangat penting untuk dipelajari karena membantu memahami bagaimana database bekerja secara lebih kompleks. Awalnya saya sedikit kesulitan memahami sintaks pembuatan procedure, tetapi setelah mencoba langsung menggunakan simulator SQL dan SSMS, saya mulai memahami cara kerja stored procedure dengan lebih baik.
+</p>
+
+<p>
+Praktikum ini memberikan pengalaman baru dalam pengolahan database karena saya belajar bagaimana membuat query yang lebih efisien, terstruktur, dan dapat digunakan kembali. Dengan memahami stored procedure, saya berharap dapat membuat aplikasi berbasis database yang lebih baik di masa mendatang.
+</p>
+
+<p>
+<a href="index.html">← Kembali ke Halaman Utama</a>
+</p>
+
+<div class="footer">
+Blog Makalah Pertemuan 9 - Rizqi Akbar
+</div>
+
+</div>
+
+</body>
+</html>
