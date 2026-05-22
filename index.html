@@ -2,26 +2,22 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Makalah Pertemuan 10</title>
+  <title>Blog Makalah Rizqi</title>
 
   <style>
     body{
-      font-family: Arial, sans-serif;
+      font-family:Arial;
       background:#f1f5f9;
-      margin:0;
-      padding:0;
-      line-height:1.8;
+      padding:40px;
     }
 
     .container{
-      width:90%;
-      max-width:900px;
-      margin:40px auto;
+      max-width:700px;
+      margin:auto;
       background:white;
-      padding:40px;
-      border-radius:15px;
-      box-shadow:0 0 15px rgba(0,0,0,0.1);
+      padding:30px;
+      border-radius:12px;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
     }
 
     h1{
@@ -29,37 +25,18 @@
       color:#1e3a8a;
     }
 
-    h2{
-      color:#2563eb;
-      margin-top:30px;
-    }
-
-    p{
-      text-align:justify;
-    }
-
-    pre{
-      background:#0f172a;
-      color:white;
-      padding:15px;
-      border-radius:10px;
-      overflow:auto;
-    }
-
-    .footer{
-      text-align:center;
-      margin-top:40px;
-      color:gray;
-    }
-
-    .badge{
-      display:inline-block;
+    .card{
       background:#2563eb;
+      padding:20px;
+      margin-top:20px;
+      border-radius:10px;
+    }
+
+    .card a{
       color:white;
-      padding:8px 14px;
-      border-radius:20px;
-      margin-top:10px;
-      font-size:14px;
+      text-decoration:none;
+      font-size:20px;
+      font-weight:bold;
     }
   </style>
 </head>
@@ -68,126 +45,18 @@
 
 <div class="container">
 
-<h1>Implementasi Stored Procedure Tingkat Lanjut pada Database AKADEMIK</h1>
+<h1>Blog Makalah Pemrograman SQL Lanjut</h1>
 
-<center>
-<span class="badge">Praktikum Pertemuan 10</span>
-</center>
+<div class="card">
+  <a href="pertemuan9.html">
+    Makalah Pertemuan 9
+  </a>
+</div>
 
-<p>
-Pada praktikum pertemuan ke-10 mata kuliah Pemrograman SQL Lanjut, saya mempelajari materi mengenai Stored Procedure II yang membahas konsep stored procedure tingkat lanjut pada database AKADEMIK. Materi ini sangat penting dalam pengembangan sistem database karena stored procedure digunakan untuk menyimpan kumpulan query SQL di dalam database sehingga dapat dipanggil kembali secara berulang tanpa harus menulis query dari awal. Dengan menggunakan stored procedure, proses pengolahan data menjadi lebih cepat, lebih aman, dan lebih terstruktur.
-</p>
-
-<p>
-Pada praktikum ini, materi yang dipelajari meliputi penggunaan multi-parameter, kontrol alur menggunakan IF ELSE, penggunaan parameter OUT, serta operasi DML seperti INSERT, UPDATE, dan DELETE di dalam procedure. Selain itu, praktikum juga menggunakan beberapa konsep lain seperti JOIN, GROUP BY, dan HAVING untuk mengolah data dari beberapa tabel sekaligus.
-</p>
-
-<h2>Pengertian Stored Procedure</h2>
-
-<p>
-Stored procedure adalah kumpulan query SQL yang disimpan di dalam database dan dapat dipanggil kembali kapan saja. Dengan stored procedure, programmer dapat membuat proses pengolahan data menjadi lebih efisien karena query tidak perlu ditulis berulang kali. Stored procedure juga membantu meningkatkan keamanan database karena pengguna tidak langsung mengakses tabel utama.
-</p>
-
-<h2>Multi Parameter</h2>
-
-<p>
-Materi pertama yang dipelajari adalah penggunaan beberapa parameter atau multi-parameter pada stored procedure. Parameter digunakan untuk menerima input dari pengguna sehingga procedure dapat menjalankan query berdasarkan kondisi tertentu. Dengan adanya multi-parameter, proses pencarian dan filter data menjadi lebih fleksibel.
-</p>
-
-<pre>
-CREATE PROCEDURE filterMhs(
-  IN p_prodi INT,
-  IN p_thn INT
-)
-BEGIN
-  SELECT * FROM mahasiswa
-  WHERE idprodi = p_prodi
-  AND thn_masuk = p_thn;
-END;
-</pre>
-
-<p>
-Query tersebut digunakan untuk menampilkan data mahasiswa berdasarkan program studi dan tahun masuk tertentu. Dengan menggunakan parameter p_prodi dan p_thn, pengguna dapat mencari data sesuai kebutuhan tanpa harus mengubah isi query utama.
-</p>
-
-<h2>IF ELSE pada Stored Procedure</h2>
-
-<p>
-Selain multi-parameter, saya juga mempelajari penggunaan kontrol alur seperti IF, ELSEIF, dan ELSE di dalam stored procedure. Fitur ini memungkinkan procedure menjalankan perintah yang berbeda berdasarkan kondisi tertentu.
-</p>
-
-<pre>
-IF p_mode = 1 THEN
-  SELECT * FROM mahasiswa;
-ELSE
-  SELECT * FROM dosen;
-END IF;
-</pre>
-
-<p>
-Dengan adanya IF ELSE, query dapat berjalan lebih dinamis dan menyesuaikan kondisi yang diberikan oleh pengguna.
-</p>
-
-<h2>OUT Parameter</h2>
-
-<p>
-Materi berikutnya adalah penggunaan parameter OUT. Parameter OUT digunakan untuk menghasilkan nilai keluaran dari procedure. Biasanya digunakan untuk mengambil hasil perhitungan atau agregasi data seperti jumlah mahasiswa, total nilai, dan lain sebagainya.
-</p>
-
-<pre>
-CREATE PROCEDURE countMhs(
-  IN p_prodi INT,
-  OUT p_count INT
-)
-BEGIN
-  SELECT COUNT(*) INTO p_count
-  FROM mahasiswa
-  WHERE idprodi = p_prodi;
-END;
-</pre>
-
-<p>
-Pada query tersebut, procedure digunakan untuk menghitung jumlah mahasiswa berdasarkan program studi tertentu. Hasil perhitungan kemudian disimpan ke dalam variabel output p_count.
-</p>
-
-<h2>Operasi DML</h2>
-
-<p>
-Selain itu, saya juga mempelajari operasi DML di dalam stored procedure. DML atau Data Manipulation Language terdiri dari INSERT, UPDATE, dan DELETE yang digunakan untuk memanipulasi data pada tabel database.
-</p>
-
-<pre>
-INSERT INTO mahasiswa(nama, idprodi)
-VALUES('Rizqi', 1);
-</pre>
-
-<pre>
-UPDATE mahasiswa
-SET nama = 'Rizqi Akbar'
-WHERE nim = '23312001';
-</pre>
-
-<pre>
-DELETE FROM mahasiswa
-WHERE nim = '23312001';
-</pre>
-
-<p>
-Dengan menyimpan operasi DML di dalam procedure, proses pengolahan data menjadi lebih praktis dan otomatis.
-</p>
-
-<h2>Kesimpulan</h2>
-
-<p>
-Menurut saya, materi Stored Procedure II cukup menantang karena banyak sintaks baru yang harus dipahami, terutama pada bagian IF ELSE dan parameter OUT. Awalnya saya cukup kesulitan memahami alur query di dalam procedure karena struktur penulisannya lebih kompleks dibanding query SQL biasa. Namun setelah mencoba langsung pada simulator SQL dan SSMS, saya mulai memahami bagaimana cara kerja stored procedure dengan lebih baik.
-</p>
-
-<p>
-Praktikum ini memberikan pengalaman yang sangat bermanfaat karena saya dapat memahami bagaimana database digunakan dalam sistem informasi yang sebenarnya. Dengan memahami stored procedure, saya menjadi lebih paham bagaimana cara membuat proses pengolahan data menjadi lebih otomatis, terstruktur, dan efisien.
-</p>
-
-<div class="footer">
-Blog Makalah Pertemuan 10 - Rizqi Akbar
+<div class="card">
+  <a href="pertemuan10.html">
+    Makalah Pertemuan 10
+  </a>
 </div>
 
 </div>
