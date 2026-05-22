@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Makalah Pertemuan 10</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f4f6f9;
+      margin:0;
+      padding:0;
+      line-height:1.7;
+    }
+
+    .container{
+      max-width:900px;
+      margin:40px auto;
+      background:white;
+      padding:40px;
+      border-radius:12px;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1{
+      color:#1e3a8a;
+      text-align:center;
+    }
+
+    h2{
+      color:#2563eb;
+      margin-top:30px;
+    }
+
+    pre{
+      background:#0f172a;
+      color:#f8fafc;
+      padding:15px;
+      border-radius:8px;
+      overflow:auto;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:40px;
+      color:gray;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Implementasi Stored Procedure Tingkat Lanjut pada Database AKADEMIK</h1>
+
+<p>
+Pada praktikum pertemuan ke-10 mata kuliah Pemrograman SQL Lanjut, saya mempelajari materi mengenai Stored Procedure II yang membahas konsep stored procedure tingkat lanjut pada database AKADEMIK.
+</p>
+
+<h2>Pengertian Stored Procedure</h2>
+
+<p>
+Stored procedure adalah kumpulan query SQL yang disimpan di dalam database dan dapat dipanggil kembali kapan saja. Dengan stored procedure, proses pengolahan data menjadi lebih cepat, aman, dan terstruktur.
+</p>
+
+<h2>Multi Parameter</h2>
+
+<p>
+Pada praktikum ini saya mempelajari penggunaan multi-parameter pada stored procedure.
+</p>
+
+<pre>
+CREATE PROCEDURE filterMhs(
+  IN p_prodi INT,
+  IN p_thn INT
+)
+BEGIN
+  SELECT * FROM mahasiswa
+  WHERE idprodi = p_prodi
+  AND thn_masuk = p_thn;
+END;
+</pre>
+
+<h2>IF ELSE</h2>
+
+<p>
+Saya juga mempelajari penggunaan IF ELSE untuk membuat logika kondisi pada stored procedure.
+</p>
+
+<pre>
+IF p_mode = 1 THEN
+  SELECT * FROM mahasiswa;
+ELSE
+  SELECT * FROM dosen;
+END IF;
+</pre>
+
+<h2>OUT Parameter</h2>
+
+<p>
+Parameter OUT digunakan untuk menghasilkan nilai keluaran dari procedure.
+</p>
+
+<pre>
+CREATE PROCEDURE countMhs(
+  IN p_prodi INT,
+  OUT p_count INT
+)
+BEGIN
+  SELECT COUNT(*) INTO p_count
+  FROM mahasiswa
+  WHERE idprodi = p_prodi;
+END;
+</pre>
+
+<h2>Kesimpulan</h2>
+
+<p>
+Menurut saya materi Stored Procedure II cukup menantang karena banyak sintaks baru yang harus dipahami. Namun setelah mencoba langsung pada simulator SQL dan SSMS, saya mulai memahami bagaimana cara kerja stored procedure dengan lebih baik.
+</p>
+
+<div class="footer">
+Blog Makalah Pertemuan 10 - Rizqi Akbar
+</div>
+
+</div>
+
+</body>
+</html>
