@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Makalah Pertemuan 11</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f1f5f9;
+      margin:0;
+      padding:0;
+      line-height:1.8;
+    }
+
+    .container{
+      width:90%;
+      max-width:900px;
+      margin:40px auto;
+      background:white;
+      padding:40px;
+      border-radius:15px;
+      box-shadow:0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1{
+      text-align:center;
+      color:#1e3a8a;
+    }
+
+    h2{
+      color:#2563eb;
+      margin-top:30px;
+    }
+
+    p{
+      text-align:justify;
+    }
+
+    pre{
+      background:#0f172a;
+      color:white;
+      padding:15px;
+      border-radius:10px;
+      overflow:auto;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:40px;
+      color:gray;
+    }
+
+    .badge{
+      display:inline-block;
+      background:#2563eb;
+      color:white;
+      padding:8px 14px;
+      border-radius:20px;
+      margin-top:10px;
+      font-size:14px;
+    }
+
+    a{
+      color:#2563eb;
+      text-decoration:none;
+      font-weight:bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Implementasi Trigger pada Database AKADEMIK</h1>
+
+<center>
+<span class="badge">Praktikum Pertemuan 11</span>
+</center>
+
+<p>
+Pada praktikum pertemuan ke-11 mata kuliah Pemrograman SQL Lanjut, saya mempelajari materi mengenai Trigger pada database AKADEMIK. Trigger merupakan kode SQL yang dijalankan secara otomatis ketika terjadi suatu event tertentu pada tabel database, seperti INSERT, UPDATE, dan DELETE. Materi ini sangat penting karena trigger sering digunakan untuk audit data, validasi tambahan, serta otomatisasi proses pada database.
+</p>
+
+<p>
+Pada praktikum ini saya mempelajari konsep dasar trigger, jenis-jenis trigger, penggunaan BEFORE dan AFTER trigger, serta penggunaan referensi OLD dan NEW untuk membaca data sebelum dan sesudah perubahan terjadi. Selain itu, saya juga belajar bagaimana trigger dapat digunakan untuk membuat audit log dan validasi otomatis pada database.
+</p>
+
+<h2>Pengertian Trigger</h2>
+
+<p>
+Trigger adalah sekumpulan perintah SQL yang akan dijalankan secara otomatis ketika terjadi suatu event tertentu pada tabel database. Trigger bekerja tanpa harus dipanggil secara manual karena database akan langsung mengeksekusinya saat event terjadi.
+</p>
+
+<p>
+Trigger biasanya digunakan untuk menjaga konsistensi data, membuat pencatatan aktivitas, validasi tambahan, serta otomatisasi proses tertentu pada sistem informasi berbasis database.
+</p>
+
+<h2>Jenis Trigger</h2>
+
+<p>
+Pada praktikum ini saya mempelajari beberapa jenis trigger yang umum digunakan pada database, yaitu:
+</p>
+
+<ul>
+  <li>BEFORE Trigger</li>
+  <li>AFTER Trigger</li>
+  <li>INSERT Trigger</li>
+  <li>UPDATE Trigger</li>
+  <li>DELETE Trigger</li>
+</ul>
+
+<p>
+BEFORE Trigger dijalankan sebelum event terjadi, sedangkan AFTER Trigger dijalankan setelah event berhasil dilakukan.
+</p>
+
+<h2>BEFORE INSERT Trigger</h2>
+
+<p>
+Contoh trigger BEFORE INSERT digunakan untuk melakukan validasi data sebelum data masuk ke dalam tabel.
+</p>
+
+<pre>
+CREATE TRIGGER cek_nilai
+BEFORE INSERT ON nilai
+FOR EACH ROW
+BEGIN
+  IF NEW.nilai < 0 THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Nilai tidak boleh negatif';
+  END IF;
+END;
+</pre>
+
+<p>
+Trigger tersebut digunakan untuk mencegah input nilai negatif pada tabel nilai. Jika pengguna memasukkan nilai kurang dari nol, maka database akan menampilkan pesan error.
+</p>
+
+<h2>AFTER INSERT Trigger</h2>
+
+<p>
+Selain BEFORE Trigger, saya juga mempelajari AFTER Trigger yang digunakan setelah event berhasil dijalankan.
+</p>
+
+<pre>
+CREATE TRIGGER log_mahasiswa
+AFTER INSERT ON mahasiswa
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log(keterangan)
+  VALUES('Data mahasiswa baru ditambahkan');
+END;
+</pre>
+
+<p>
+Trigger tersebut digunakan untuk mencatat aktivitas penambahan data mahasiswa ke dalam tabel audit_log secara otomatis.
+</p>
+
+<h2>Penggunaan OLD dan NEW</h2>
+
+<p>
+Pada trigger, OLD digunakan untuk mengambil data lama sebelum perubahan terjadi, sedangkan NEW digunakan untuk mengambil data baru setelah perubahan dilakukan.
+</p>
+
+<pre>
+CREATE TRIGGER update_nama
+BEFORE UPDATE ON mahasiswa
+FOR EACH ROW
+BEGIN
+  INSERT INTO log_update
+  VALUES(OLD.nama, NEW.nama);
+END;
+</pre>
+
+<p>
+Dengan menggunakan OLD dan NEW, database dapat menyimpan riwayat perubahan data secara otomatis.
+</p>
+
+<h2>Keuntungan Trigger</h2>
+
+<p>
+Trigger memiliki banyak keuntungan dalam pengolahan database. Salah satunya adalah membantu otomatisasi proses tanpa harus menjalankan query secara manual. Selain itu, trigger juga membantu menjaga konsistensi data serta meningkatkan keamanan sistem database.
+</p>
+
+<p>
+Trigger juga sangat berguna dalam pembuatan audit log karena setiap perubahan data dapat dicatat secara otomatis oleh sistem.
+</p>
+
+<h2>Penerapan pada Database AKADEMIK</h2>
+
+<p>
+Pada database AKADEMIK, trigger dapat digunakan untuk mencatat perubahan data mahasiswa, validasi input nilai, serta pencatatan aktivitas pengguna pada sistem akademik. Dengan adanya trigger, sistem informasi akademik menjadi lebih otomatis dan efisien.
+</p>
+
+<p>
+Selain itu, trigger membantu mengurangi kesalahan input data karena validasi dilakukan langsung oleh server database.
+</p>
+
+<h2>Kesimpulan</h2>
+
+<p>
+Menurut saya, materi Trigger sangat menarik karena database dapat menjalankan proses secara otomatis ketika terjadi perubahan data. Awalnya saya cukup kesulitan memahami penggunaan OLD dan NEW, tetapi setelah mencoba langsung pada simulator SQL dan SSMS, saya mulai memahami cara kerja trigger dengan lebih baik.
+</p>
+
+<p>
+Praktikum ini memberikan pengalaman baru mengenai otomatisasi database dan membantu saya memahami bagaimana sistem database bekerja secara lebih kompleks. Dengan memahami trigger, saya berharap dapat membuat sistem informasi berbasis database yang lebih aman, terstruktur, dan efisien di masa mendatang.
+</p>
+
+<p>
+<a href="index.html">← Kembali ke Halaman Utama</a>
+</p>
+
+<div class="footer">
+Blog Makalah Pertemuan 11 - Rizqi Akbar
+</div>
+
+</div>
+
+</body>
+</html>
