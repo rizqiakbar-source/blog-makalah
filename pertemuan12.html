@@ -1,1 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Makalah Pertemuan 12</title>
 
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f1f5f9;
+      margin:0;
+      padding:0;
+      line-height:1.8;
+    }
+
+    .container{
+      width:90%;
+      max-width:900px;
+      margin:40px auto;
+      background:white;
+      padding:40px;
+      border-radius:15px;
+      box-shadow:0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1{
+      text-align:center;
+      color:#1e3a8a;
+    }
+
+    h2{
+      color:#2563eb;
+      margin-top:30px;
+    }
+
+    p{
+      text-align:justify;
+    }
+
+    pre{
+      background:#0f172a;
+      color:white;
+      padding:15px;
+      border-radius:10px;
+      overflow:auto;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:40px;
+      color:gray;
+    }
+
+    .badge{
+      display:inline-block;
+      background:#2563eb;
+      color:white;
+      padding:8px 14px;
+      border-radius:20px;
+      margin-top:10px;
+      font-size:14px;
+    }
+
+    a{
+      color:#2563eb;
+      text-decoration:none;
+      font-weight:bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Implementasi Transaction pada Database AKADEMIK</h1>
+
+<center>
+<span class="badge">Praktikum Pertemuan 12</span>
+</center>
+
+<p>
+Pada praktikum pertemuan ke-12 mata kuliah Pemrograman SQL Lanjut, saya mempelajari materi mengenai Transaction pada database AKADEMIK. Transaction merupakan mekanisme yang digunakan untuk mengelompokkan beberapa perintah SQL menjadi satu kesatuan proses sehingga seluruh perintah dapat dijalankan secara bersamaan atau dibatalkan secara bersamaan. Materi ini sangat penting karena membantu menjaga konsistensi dan integritas data dalam sistem basis data.
+</p>
+
+<p>
+Pada praktikum ini saya mempelajari penggunaan BEGIN, COMMIT, ROLLBACK, SAVEPOINT, ROLLBACK TO SAVEPOINT, dan RELEASE SAVEPOINT. Selain itu, saya juga mempelajari transaksi lintas tabel yang melibatkan tabel mahasiswa dan dosen dalam satu transaksi. Melalui berbagai skenario latihan, saya dapat memahami bagaimana database menjaga data tetap konsisten meskipun terjadi kesalahan saat proses transaksi berlangsung.
+</p>
+
+<h2>Pengertian Transaction</h2>
+
+<p>
+Transaction adalah sekumpulan perintah SQL yang diperlakukan sebagai satu unit kerja. Seluruh perintah yang berada dalam satu transaction harus berhasil secara keseluruhan atau dibatalkan secara keseluruhan. Konsep ini dikenal dengan prinsip Atomicity atau all-or-nothing.
+</p>
+
+<p>
+Dalam sistem informasi akademik, transaction sangat penting karena sering terdapat beberapa perubahan data yang saling berkaitan. Misalnya saat mengubah data mahasiswa, memperbarui nilai, atau mengubah status akademik. Jika salah satu proses gagal, maka seluruh perubahan dapat dibatalkan agar data tetap konsisten.
+</p>
+
+<h2>Konsep ACID</h2>
+
+<p>
+Transaction memiliki empat karakteristik utama yang disebut ACID, yaitu:
+</p>
+
+<ul>
+<li><b>Atomicity</b> : Semua proses berhasil atau semuanya dibatalkan.</li>
+<li><b>Consistency</b> : Data tetap berada dalam kondisi valid.</li>
+<li><b>Isolation</b> : Transaksi yang berjalan bersamaan tidak saling mengganggu.</li>
+<li><b>Durability</b> : Data yang sudah COMMIT akan tersimpan permanen.</li>
+</ul>
+
+<p>
+Pada praktikum ini fokus utama pembelajaran berada pada konsep Atomicity karena seluruh skenario latihan berkaitan dengan penyimpanan dan pembatalan perubahan data.
+</p>
+
+<h2>BEGIN dan COMMIT</h2>
+
+<p>
+BEGIN digunakan untuk memulai transaksi, sedangkan COMMIT digunakan untuk menyimpan seluruh perubahan yang telah dilakukan.
+</p>
+
+<pre>
+BEGIN;
+
+UPDATE mahasiswa
+SET ipk = 3.95
+WHERE npm = '1501001';
+
+COMMIT;
+</pre>
+
+<p>
+Jika COMMIT berhasil dijalankan, maka perubahan data akan tersimpan secara permanen ke dalam database.
+</p>
+
+<h2>ROLLBACK</h2>
+
+<p>
+ROLLBACK digunakan untuk membatalkan seluruh perubahan yang terjadi selama transaksi berlangsung.
+</p>
+
+<pre>
+BEGIN;
+
+UPDATE mahasiswa
+SET ipk = 0
+WHERE npm = '1501001';
+
+ROLLBACK;
+</pre>
+
+<p>
+Dengan menggunakan ROLLBACK, perubahan yang telah dilakukan tidak akan tersimpan dan database akan kembali ke kondisi sebelumnya.
+</p>
+
+<h2>SAVEPOINT dan ROLLBACK TO SAVEPOINT</h2>
+
+<p>
+SAVEPOINT digunakan untuk membuat titik penyimpanan sementara di dalam transaksi. Jika terjadi kesalahan setelah savepoint dibuat, maka kita dapat kembali ke titik tersebut menggunakan ROLLBACK TO SAVEPOINT.
+</p>
+
+<pre>
+BEGIN;
+
+UPDATE mahasiswa
+SET ipk = 3.85
+WHERE npm = '1501001';
+
+SAVEPOINT sp1;
+
+UPDATE mahasiswa
+SET ipk = 0
+WHERE idprodi = 1;
+
+ROLLBACK TO sp1;
+
+COMMIT;
+</pre>
+
+<p>
+Pada contoh tersebut, perubahan kedua dibatalkan sedangkan perubahan pertama tetap tersimpan.
+</p>
+
+<h2>RELEASE SAVEPOINT</h2>
+
+<p>
+RELEASE SAVEPOINT digunakan untuk menghapus savepoint yang sudah tidak diperlukan lagi.
+</p>
+
+<pre>
+BEGIN;
+
+SAVEPOINT sp1;
+
+UPDATE dosen
+SET gelar = 'Prof.Dr.'
+WHERE nmdosen = 'Ahmad Fauzi';
+
+RELEASE SAVEPOINT sp1;
+
+COMMIT;
+</pre>
+
+<p>
+Perintah ini digunakan ketika savepoint sudah tidak diperlukan tetapi transaksi masih ingin dilanjutkan.
+</p>
+
+<h2>Transaksi Lintas Tabel</h2>
+
+<p>
+Pada praktikum ini saya juga mempelajari transaksi lintas tabel yang melibatkan tabel mahasiswa dan dosen secara bersamaan. Dengan transaction, beberapa perubahan pada tabel yang berbeda dapat diperlakukan sebagai satu kesatuan proses.
+</p>
+
+<pre>
+BEGIN;
+
+UPDATE mahasiswa
+SET ipk = 3.85
+WHERE npm = '1501001';
+
+UPDATE dosen
+SET gelar = 'Prof.Dr.'
+WHERE nmdosen = 'Ahmad Fauzi';
+
+COMMIT;
+</pre>
+
+<p>
+Jika salah satu perintah gagal dijalankan, maka seluruh perubahan dapat dibatalkan sehingga konsistensi data tetap terjaga.
+</p>
+
+<h2>Keuntungan Menggunakan Transaction</h2>
+
+<p>
+Transaction memberikan banyak keuntungan dalam pengelolaan database. Dengan transaction, data menjadi lebih aman karena perubahan dapat dikontrol secara terstruktur. Selain itu, transaction membantu menjaga integritas data serta mengurangi risiko inkonsistensi akibat kesalahan pengguna atau gangguan sistem.
+</p>
+
+<p>
+Penggunaan SAVEPOINT juga memberikan fleksibilitas karena memungkinkan pembatalan sebagian transaksi tanpa harus membatalkan seluruh proses yang sedang berjalan.
+</p>
+
+<h2>Penerapan pada Database AKADEMIK</h2>
+
+<p>
+Pada database AKADEMIK, transaction dapat digunakan untuk pengelolaan data mahasiswa, perubahan nilai, perubahan status akademik, serta pengelolaan data dosen. Dengan adanya transaction, seluruh perubahan dapat dilakukan dengan lebih aman dan terkontrol.
+</p>
+
+<p>
+Penerapan transaction sangat membantu dalam menjaga kualitas data karena setiap perubahan dapat dipastikan berjalan sesuai aturan yang telah ditentukan.
+</p>
+
+<h2>Kesimpulan</h2>
+
+<p>
+Menurut saya, materi Transaction sangat penting karena hampir seluruh aplikasi modern menggunakan konsep ini dalam pengelolaan database. Awalnya saya cukup kesulitan memahami perbedaan antara COMMIT, ROLLBACK, dan SAVEPOINT, tetapi setelah mencoba berbagai skenario praktikum saya menjadi lebih memahami cara kerja masing-masing perintah tersebut.
+</p>
+
+<p>
+Praktikum ini memberikan pemahaman mengenai pentingnya menjaga konsistensi data melalui konsep ACID, khususnya Atomicity. Dengan memahami Transaction, saya dapat mengelola perubahan data secara lebih aman, terstruktur, dan profesional dalam pengembangan sistem berbasis database di masa mendatang.
+</p>
+
+<p>
+<a href="index.html">← Kembali ke Halaman Utama</a>
+</p>
+
+<div class="footer">
+Blog Makalah Pertemuan 12 - Rizqi Akbar
+</div>
+
+</div>
+
+</body>
+</html>
