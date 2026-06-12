@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Makalah Pertemuan 13</title>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#f1f5f9;
+      margin:0;
+      padding:0;
+      line-height:1.8;
+    }
+
+    .container{
+      width:90%;
+      max-width:900px;
+      margin:40px auto;
+      background:white;
+      padding:40px;
+      border-radius:15px;
+      box-shadow:0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1{
+      text-align:center;
+      color:#1e3a8a;
+    }
+
+    h2{
+      color:#2563eb;
+      margin-top:30px;
+    }
+
+    p{
+      text-align:justify;
+    }
+
+    pre{
+      background:#0f172a;
+      color:white;
+      padding:15px;
+      border-radius:10px;
+      overflow:auto;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:40px;
+      color:gray;
+    }
+
+    .badge{
+      display:inline-block;
+      background:#2563eb;
+      color:white;
+      padding:8px 14px;
+      border-radius:20px;
+      margin-top:10px;
+      font-size:14px;
+    }
+
+    a{
+      color:#2563eb;
+      text-decoration:none;
+      font-weight:bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>User Management MySQL pada Database AKADEMIK</h1>
+
+<center>
+<span class="badge">Praktikum Pertemuan 13</span>
+</center>
+
+<p>
+Pada praktikum pertemuan ke-13 mata kuliah Pemrograman SQL Lanjut, saya mempelajari materi mengenai User Management pada MySQL. Materi ini membahas bagaimana cara mengelola akun pengguna database beserta hak akses yang dimilikinya. Pengelolaan user sangat penting karena berhubungan langsung dengan keamanan data dan pembatasan akses pada sistem database.
+</p>
+
+<p>
+Dalam praktikum ini saya mempelajari penggunaan perintah CREATE USER, GRANT, REVOKE, dan DROP USER. Selain itu, saya juga mempelajari cara melakukan verifikasi hak akses menggunakan SHOW USERS, SHOW PERMISSIONS, dan SHOW GRANTS FOR. Melalui materi ini saya memahami bagaimana administrator database mengatur siapa saja yang dapat membaca, menambah, mengubah, atau menghapus data pada database AKADEMIK.
+</p>
+
+<h2>Pengertian User Management</h2>
+
+<p>
+User Management adalah proses pengelolaan akun pengguna dan hak akses pada database. Setiap pengguna dapat diberikan hak akses yang berbeda sesuai dengan tugas dan tanggung jawabnya. Konsep ini dikenal dengan prinsip <i>Least Privilege</i>, yaitu setiap pengguna hanya diberikan akses yang benar-benar diperlukan.
+</p>
+
+<p>
+Dengan menerapkan User Management, keamanan database dapat ditingkatkan karena tidak semua pengguna memiliki akses penuh terhadap seluruh data yang tersimpan.
+</p>
+
+<h2>CREATE USER</h2>
+
+<p>
+CREATE USER digunakan untuk membuat akun pengguna baru pada database. Saat membuat user, administrator harus menentukan username, host, dan password yang digunakan untuk login.
+</p>
+
+<pre>
+CREATE USER 'budi'@'localhost'
+IDENTIFIED BY 'password123';
+</pre>
+
+<p>
+Perintah tersebut akan membuat user baru bernama budi yang hanya dapat mengakses database dari komputer localhost dengan password yang telah ditentukan.
+</p>
+
+<h2>GRANT Privileges</h2>
+
+<p>
+GRANT digunakan untuk memberikan hak akses kepada user. Hak akses dapat berupa SELECT, INSERT, UPDATE, DELETE, maupun ALL PRIVILEGES.
+</p>
+
+<pre>
+GRANT SELECT
+ON mahasiswa
+TO 'budi'@'localhost';
+</pre>
+
+<p>
+Pada contoh tersebut, user budi hanya diberikan hak untuk melihat data pada tabel mahasiswa.
+</p>
+
+<p>
+Hak akses juga dapat diberikan lebih dari satu sekaligus.
+</p>
+
+<pre>
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON mahasiswa
+TO 'admin'@'localhost';
+</pre>
+
+<p>
+Dengan perintah tersebut, user admin dapat melakukan seluruh operasi dasar pada tabel mahasiswa.
+</p>
+
+<h2>ALL PRIVILEGES</h2>
+
+<p>
+Jika administrator ingin memberikan seluruh hak akses kepada pengguna, maka dapat menggunakan ALL PRIVILEGES.
+</p>
+
+<pre>
+GRANT ALL PRIVILEGES
+ON *.*
+TO 'root'@'localhost';
+</pre>
+
+<p>
+Perintah tersebut memberikan hak penuh terhadap seluruh database dan tabel yang tersedia.
+</p>
+
+<h2>REVOKE Privileges</h2>
+
+<p>
+REVOKE digunakan untuk mencabut hak akses yang sebelumnya telah diberikan kepada pengguna.
+</p>
+
+<pre>
+REVOKE INSERT
+ON mahasiswa
+FROM 'budi'@'localhost';
+</pre>
+
+<p>
+Setelah perintah tersebut dijalankan, user budi tidak lagi memiliki hak untuk menambahkan data ke tabel mahasiswa.
+</p>
+
+<p>
+Administrator juga dapat mencabut seluruh hak akses sekaligus.
+</p>
+
+<pre>
+REVOKE ALL PRIVILEGES
+ON mahasiswa
+FROM 'temp'@'localhost';
+</pre>
+
+<p>
+Dengan demikian user temp tidak lagi memiliki akses terhadap tabel mahasiswa.
+</p>
+
+<h2>DROP USER</h2>
+
+<p>
+DROP USER digunakan untuk menghapus akun pengguna dari sistem database. Ketika user dihapus, seluruh hak akses yang dimilikinya juga akan ikut hilang.
+</p>
+
+<pre>
+DROP USER 'budi'@'localhost';
+</pre>
+
+<p>
+Perintah tersebut akan menghapus akun budi dari database.
+</p>
+
+<h2>Verifikasi Hak Akses</h2>
+
+<p>
+Pada praktikum ini terdapat beberapa perintah verifikasi yang digunakan untuk memastikan bahwa user dan hak akses telah berhasil dibuat atau diubah.
+</p>
+
+<pre>
+SHOW USERS;
+SHOW PERMISSIONS;
+SHOW GRANTS FOR 'budi'@'localhost';
+</pre>
+
+<p>
+SHOW USERS digunakan untuk melihat daftar pengguna, SHOW PERMISSIONS digunakan untuk melihat matriks hak akses, sedangkan SHOW GRANTS FOR digunakan untuk melihat hak akses yang dimiliki oleh user tertentu.
+</p>
+
+<h2>Daftar Privilege yang Dipelajari</h2>
+
+<ul>
+<li>SELECT : Membaca data.</li>
+<li>INSERT : Menambahkan data baru.</li>
+<li>UPDATE : Mengubah data yang sudah ada.</li>
+<li>DELETE : Menghapus data.</li>
+<li>ALL PRIVILEGES : Seluruh hak akses sekaligus.</li>
+</ul>
+
+<h2>Penerapan pada Database AKADEMIK</h2>
+
+<p>
+Dalam database AKADEMIK, User Management dapat digunakan untuk membedakan hak akses antara administrator, dosen, dan operator akademik. Misalnya dosen hanya diberikan hak untuk melihat dan memperbarui nilai mahasiswa, sedangkan administrator memiliki akses penuh terhadap seluruh tabel.
+</p>
+
+<p>
+Dengan pembagian hak akses yang tepat, keamanan data akademik dapat lebih terjamin dan risiko penyalahgunaan data dapat diminimalkan.
+</p>
+
+<h2>Pengalaman Praktikum</h2>
+
+<p>
+Pada praktikum ini saya mempelajari cara membuat akun pengguna baru, memberikan hak akses tertentu, mencabut hak akses, hingga menghapus user dari sistem database. Saya juga melakukan verifikasi menggunakan berbagai perintah SHOW untuk memastikan bahwa setiap perubahan hak akses telah berjalan sesuai dengan yang diharapkan.
+</p>
+
+<p>
+Melalui latihan yang diberikan, saya memahami pentingnya pengelolaan hak akses dalam menjaga keamanan database dan memastikan setiap pengguna hanya memiliki akses sesuai tanggung jawabnya.
+</p>
+
+<h2>Kesimpulan</h2>
+
+<p>
+Menurut saya, materi User Management sangat penting karena berkaitan langsung dengan keamanan database. Dengan memahami CREATE USER, GRANT, REVOKE, dan DROP USER, saya dapat mengelola pengguna database secara lebih baik dan profesional.
+</p>
+
+<p>
+Praktikum ini memberikan pemahaman bahwa keamanan data tidak hanya bergantung pada struktur database, tetapi juga pada pengaturan hak akses pengguna. Dengan menerapkan prinsip Least Privilege, sistem database dapat menjadi lebih aman, terkontrol, dan efisien.
+</p>
+
+<p>
+<a href="index.html">← Kembali ke Halaman Utama</a>
+</p>
+
+<div class="footer">
+Blog Makalah Pertemuan 13 - Rizqi Akbar
+</div>
+
+</div>
+
+</body>
+</html>
