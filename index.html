@@ -1,81 +1,173 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Blog Makalah Rizqi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body{
-      font-family:Arial;
-      background:#f1f5f9;
-      padding:40px;
-    }
+<title>Blog Makalah Rizqi Akbar</title>
 
-    .container{
-      max-width:700px;
-      margin:auto;
-      background:white;
-      padding:30px;
-      border-radius:12px;
-      box-shadow:0 0 10px rgba(0,0,0,0.1);
-    }
+<style>
 
-    h1{
-      text-align:center;
-      color:#1e3a8a;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
 
-    .card{
-      background:#2563eb;
-      padding:20px;
-      margin-top:20px;
-      border-radius:10px;
-    }
+body{
+background:linear-gradient(135deg,#0f172a,#1e293b);
+min-height:100vh;
+padding:40px 20px;
+}
 
-    .card a{
-      color:white;
-      text-decoration:none;
-      font-size:20px;
-      font-weight:bold;
-    }
-  </style>
+.container{
+max-width:1000px;
+margin:auto;
+}
+
+.header{
+text-align:center;
+margin-bottom:40px;
+}
+
+.avatar{
+width:120px;
+height:120px;
+margin:auto;
+border-radius:50%;
+background:linear-gradient(135deg,#2563eb,#38bdf8);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:50px;
+color:white;
+font-weight:bold;
+margin-bottom:20px;
+box-shadow:0 0 30px rgba(59,130,246,.5);
+}
+
+.header h1{
+color:white;
+font-size:42px;
+margin-bottom:10px;
+}
+
+.header p{
+color:#cbd5e1;
+font-size:18px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+}
+
+.card{
+text-decoration:none;
+background:white;
+border-radius:20px;
+padding:25px;
+transition:.3s;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(37,99,235,.35);
+}
+
+.icon{
+font-size:40px;
+margin-bottom:15px;
+}
+
+.card h2{
+color:#1e3a8a;
+margin-bottom:10px;
+}
+
+.card p{
+color:#64748b;
+line-height:1.6;
+}
+
+.footer{
+margin-top:50px;
+text-align:center;
+color:#cbd5e1;
+}
+
+</style>
+
 </head>
 
 <body>
 
 <div class="container">
 
+<div class="header">
+
+<div class="avatar">
+R
+</div>
+
 <h1>Blog Makalah Pemrograman SQL 2</h1>
 
-<div class="card">
-  <a href="pertemuan9.html">
-    Makalah Pertemuan 9
-  </a>
+<p>
+Rizqi Akbar | Manajemen Informatika
+</p>
+
 </div>
 
-<div class="card">
-  <a href="pertemuan10.html">
-    Makalah Pertemuan 10
-  </a>
+<div class="grid">
+
+<a href="pertemuan9.html" class="card">
+<div class="icon">📖</div>
+<h2>Pertemuan 9</h2>
+<p>
+Pembahasan materi dan praktikum SQL pertemuan ke-9.
+</p>
+</a>
+
+<a href="pertemuan10.html" class="card">
+<div class="icon">💻</div>
+<h2>Pertemuan 10</h2>
+<p>
+Materi dan implementasi SQL pada pertemuan ke-10.
+</p>
+</a>
+
+<a href="pertemuan11.html" class="card">
+<div class="icon">⚡</div>
+<h2>Pertemuan 11</h2>
+<p>
+Implementasi Trigger pada Database AKADEMIK.
+</p>
+</a>
+
+<a href="pertemuan12.html" class="card">
+<div class="icon">🔄</div>
+<h2>Pertemuan 12</h2>
+<p>
+Implementasi Transaction, COMMIT, ROLLBACK, dan SAVEPOINT.
+</p>
+</a>
+
+<a href="pertemuan13.html" class="card">
+<div class="icon">🔐</div>
+<h2>Pertemuan 13</h2>
+<p>
+User Management MySQL: CREATE USER, GRANT, REVOKE, dan DROP USER.
+</p>
+</a>
+
 </div>
 
-<div class="card">
-  <a href="pertemuan11.html">
-    Makalah Pertemuan 11
-  </a>
+<div class="footer">
+© 2026 Rizqi Akbar | Blog Makalah Pemrograman SQL Lanjut
 </div>
-
-<div class="card">
-  <a href="pertemuan12.html">
-    Makalah Pertemuan 12
-  </a>
-</div>  
-
-<div class="card">
-  <a href="pertemuan13.html">
-    Makalah Pertemuan 13
-  </a>
-</div>  
 
 </div>
 
